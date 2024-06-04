@@ -1,12 +1,4 @@
-# MSAL.js 2.x + Vue 3 + TypeScript Sample
 
-## About this sample
-
-This sample demonstrates one way you can integrate the `@azure/msal-browser` package into your Vue 3 application using the [composition API](https://v3.vuejs.org/api/composition-api.html). It is not exhaustive and there may be simpler or more complex solutions depending on your specific use case.
-
-⚠️ This sample is currently for demonstration purposes only. Support will be limited.
-
-## How to run the sample
 
 ### Pre-requisites
 
@@ -25,19 +17,7 @@ This sample demonstrates one way you can integrate the `@azure/msal-browser` pac
 npm install
 ```
 
-### Running the sample
 
-```bash
-npm start
-```
-
-1. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-- In the web page, hover over the "Sign In" button and select either `Sign in using Popup` or `Sign in using Redirect` to begin the auth flow.
-- Navigate directly to one of the example pages (/profile or /profilenoguard) to invoke a login on page load and see your profile information using the Microsoft Graph API
 
 ## How this sample works
 
@@ -183,30 +163,3 @@ This sample demonstrates integration with the official router for vue: `vue-rout
 
 When MSAL.js needs to change routes, such as when returning the user to the page they were trying to get to from the `redirectUri`, it will by default reassign `window.location`. This can be a problem when using routers because it will trigger a full page refresh, rerendering the entire page, which is not always desired. To take advantage of the benefits routers provide MSAL.js exposes an API called `setNavigationClient` which allows you to override the methods used to perform navigation.
 
-An example navigation client for `vue-router` can be found in `src/router/NavigationClient.ts`. You'll also find the following 2 lines in `main.ts` which provides this custom navigation client to MSAL.js:
-
-```javascript
-const navigationClient = new CustomNavigationClient(router);
-msalInstance.setNavigationClient(navigationClient);
-```
-
-#### Guarding routes
-
-This sample also demonstrates how to write a global route guard if your application uses the `vue-router` package to handle routing.
-
-In the router configuration, located in `src/router/router.ts`, we register the route we want to protect with a `meta.requiresAuth` property, like so:
-
-```javascript
-const routes = [
-  {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile,
-    meta: {
-        requiresAuth: true
-    }
-  }
-];
-```
-
-Then we register a global route guard, as shown in `src/router/Guard.ts`. A similar approach can be taken for [per route guards](https://router.vuejs.org/guide/advanced/navigation-guards.html#per-route-guard) instead, if desired.
